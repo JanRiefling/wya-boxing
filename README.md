@@ -1,1 +1,1 @@
-## WYA - App to exercise at home
+## WYA - App to exercise

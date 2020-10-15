@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import WyaAppBar from '../components/WyaAppBar';
+import TimerForm from '../components/timer/TimerForm';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -28,7 +29,9 @@ export default function StartPage() {
           <Paper className={classes.paper}>WYA is a helper to improve your boxing skills! You have a timer function by minutes or rounds.</Paper>
         </Grid>
         <Grid item xs={12} sm={6}>
-          <Paper className={classes.paper}>xs=12 sm=6</Paper>
+          <Paper className={classes.paper}>
+              <TimerForm />
+          </Paper>
         </Grid>
         <Grid item xs={12} sm={6}>
           <Paper className={classes.paper}>xs=6 sm=3</Paper>
