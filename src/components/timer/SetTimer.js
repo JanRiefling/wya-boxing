@@ -3,6 +3,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import FormControl from '@material-ui/core/FormControl';
+import {useDispatch} from 'react-redux';
+import {setTimerTime} from '../../actions/index'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -24,7 +26,7 @@ export default function SetTimer() {
 const [hours, setHours] = useState(0);
 const [minutes, setMinutes] = useState(0);
 const [seconds, setSeconds] = useState(0);
-
+const dispatch = useDispatch();
 
 
 function submitTime(){
@@ -32,10 +34,11 @@ function submitTime(){
 let hoursInMs = hours * 60 * 60 * 1000;
 let minutesInMs = minutes * 60 * 1000;
 let secondsInMs = seconds * 1000;
+let ms = hoursInMs + minutesInMs + secondsInMs;
 
-console.log(hoursInMs + minutesInMs + secondsInMs);
 
-//
+dispatch(setTimerTime(ms));
+
 }
 
 
