@@ -4,6 +4,7 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import WyaAppBar from '../components/WyaAppBar';
 import TimerForm from '../components/timer/TimerForm';
+import StopWatch from '../components/timer/StopWatch';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -34,10 +35,10 @@ export default function StartPage() {
           </Paper>
         </Grid>
         <Grid item xs={12} sm={6}>
-          <Paper className={classes.paper}>xs=6 sm=3</Paper>
+          <Paper className={classes.paper}><StopWatch /></Paper>
         </Grid>
         <Grid item xs={12}>
-          <Paper className={classes.paper}>xs=6 sm=3</Paper>
+          <Paper className={classes.paper}></Paper>
         </Grid>
         <Grid item xs={12}>
           <Paper className={classes.paper}>xs=6 sm=3</Paper>

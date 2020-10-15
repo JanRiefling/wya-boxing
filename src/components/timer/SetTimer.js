@@ -1,16 +1,15 @@
-import React, { useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
-import FormControl from '@material-ui/core/FormControl';
-import {useDispatch} from 'react-redux';
-import {setTimerTime} from '../../actions/index'
-
+import React, { useState } from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
+import FormControl from "@material-ui/core/FormControl";
+import { useDispatch } from "react-redux";
+import { setTimerTime } from "../../actions/index";
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    display: 'flex',
-    flexWrap: 'wrap',
+    display: "flex",
+    flexWrap: "wrap",
   },
   textField: {
     marginLeft: theme.spacing(1),
@@ -22,26 +21,19 @@ const useStyles = makeStyles((theme) => ({
 export default function SetTimer() {
   const classes = useStyles();
 
+  const [hours, setHours] = useState(0);
+  const [minutes, setMinutes] = useState(0);
+  const [seconds, setSeconds] = useState(0);
+  const dispatch = useDispatch();
 
-const [hours, setHours] = useState(0);
-const [minutes, setMinutes] = useState(0);
-const [seconds, setSeconds] = useState(0);
-const dispatch = useDispatch();
+  function submitTime() {
+    let hoursInMs = hours * 60 * 60 * 1000;
+    let minutesInMs = minutes * 60 * 1000;
+    let secondsInMs = seconds * 1000;
+    let ms = hoursInMs + minutesInMs + secondsInMs;
 
-
-function submitTime(){
-
-let hoursInMs = hours * 60 * 60 * 1000;
-let minutesInMs = minutes * 60 * 1000;
-let secondsInMs = seconds * 1000;
-let ms = hoursInMs + minutesInMs + secondsInMs;
-
-
-dispatch(setTimerTime(ms));
-
-}
-
-
+    dispatch(setTimerTime(hours, minutes, seconds, ms));
+  }
 
   return (
     <FormControl className={classes.container} noValidate>
@@ -49,19 +41,21 @@ dispatch(setTimerTime(ms));
         id="setHours"
         label="Hours"
         type="number"
-        onChange={(e)=> {setHours(e.target.value)}}
+        onChange={(e) => {
+          setHours(e.target.value);
+        }}
         value={hours}
         className={classes.textField}
         InputLabelProps={{
           shrink: true,
         }}
       />
-            <TextField
+      <TextField
         id="setMinutes"
         label="Minutes"
         type="number"
-        onChange={(e)=> {
-          setMinutes(e.target.value)
+        onChange={(e) => {
+          setMinutes(e.target.value);
           console.log(minutes);
         }}
         value={minutes}
@@ -70,18 +64,22 @@ dispatch(setTimerTime(ms));
           shrink: true,
         }}
       />
-        <TextField
+      <TextField
         id="setSeconds"
         label="Seconds"
         type="number"
-        onChange={(e)=> {setSeconds(e.target.value)}}
+        onChange={(e) => {
+          setSeconds(e.target.value);
+        }}
         value={seconds}
         className={classes.textField}
         InputLabelProps={{
           shrink: true,
         }}
       />
-      <Button variant="contained" color="primary" onClick={submitTime}>Start Timer by Minutes</Button>
+      <Button variant="contained" color="primary" onClick={submitTime}>
+        Set Timer
+      </Button>
     </FormControl>
   );
 }

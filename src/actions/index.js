@@ -1,7 +1,15 @@
 export const SET_TIMER = 'SET_TIMER';
 
 
-export function setTimerTime (time) { return {type: SET_TIMER, payload: time} };
+export function setTimerTime (hours, minutes, seconds, ms) { 
+    return {
+        type: SET_TIMER, 
+        hours: hours, 
+        minutes: minutes, 
+        seconds: seconds,
+        sumInMs: ms,
+    } 
+};
 
 export const RESET_TIMER = 'RESET_TIMER';
 

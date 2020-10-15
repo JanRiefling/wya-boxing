@@ -33,7 +33,7 @@ export default function SetRounds() {
       value={rounds}
       onChange={e => setRounds(e.target.value)}
       />
-      <Button variant="contained" color="primary" onClick={submitRounds}>Start Timer by Rounds</Button>
+      <Button variant="contained" color="primary" onClick={submitRounds}>Set Rounds</Button>
     </FormControl>
   );
 }
