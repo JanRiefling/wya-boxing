@@ -1,11 +1,11 @@
 import React from 'react';
 import { Container } from '@material-ui/core';
-import WyaAppBar from './components/WyaAppBar.js';
+import StartPage from './pages/StartPage.js';
 
 function App() {
   return (
     <Container>
-      <WyaAppBar />
+      <StartPage />
     </Container>
   );
 }
