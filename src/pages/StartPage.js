@@ -27,7 +27,7 @@ export default function StartPage() {
           <WyaAppBar />
         </Grid>
         <Grid item xs={12}>
-          <Paper className={classes.paper}>WYA is a helper to improve your boxing skills! You have a timer function by minutes or rounds.</Paper>
+          <Paper className={classes.paper}>WYA is a helper for shadowboxing</Paper>
         </Grid>
         <Grid item xs={12} sm={6}>
           <Paper className={classes.paper}>

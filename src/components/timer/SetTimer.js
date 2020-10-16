@@ -26,13 +26,13 @@ export default function SetTimer() {
   const [seconds, setSeconds] = useState(0);
   const dispatch = useDispatch();
 
-  function submitTime() {
-    let hoursInMs = hours * 60 * 60 * 1000;
-    let minutesInMs = minutes * 60 * 1000;
-    let secondsInMs = seconds * 1000;
-    let ms = hoursInMs + minutesInMs + secondsInMs;
+  
 
-    dispatch(setTimerTime(hours, minutes, seconds, ms));
+  function submitTime() {
+    
+    const totalTimeInMs = (seconds * 1000) + (hours * 60 * 60 * 1000) + (minutes * 60 * 1000);
+    dispatch(setTimerTime(totalTimeInMs));
+    console.log(totalTimeInMs)
   }
 
   return (
