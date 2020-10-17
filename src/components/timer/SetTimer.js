@@ -14,6 +14,7 @@ const useStyles = makeStyles((theme) => ({
   textField: {
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
+    marginTop: theme.spacing(2),
     width: 200,
   },
 }));
@@ -29,11 +30,18 @@ export default function SetTimer() {
   
 
   function submitTime() {
-    
     const totalTimeInMs = (seconds * 1000) + (hours * 60 * 60 * 1000) + (minutes * 60 * 1000);
     dispatch(setTimerTime(totalTimeInMs));
     console.log(totalTimeInMs)
   }
+
+ function resetTimer() {
+   setHours(0);
+   setMinutes(0);
+   setSeconds(0);
+   dispatch({type: "RESET_TIMER"});
+ }
+
 
   return (
     <FormControl className={classes.container} noValidate>
@@ -77,9 +85,10 @@ export default function SetTimer() {
           shrink: true,
         }}
       />
-      <Button variant="contained" color="primary" onClick={submitTime}>
+      <Button className={classes.textField} variant="contained" color="primary" onClick={submitTime}>
         Set Timer
       </Button>
+      <Button className={classes.textField} variant="contained" color="primary" onClick={resetTimer}>Reset</Button>
     </FormControl>
   );
 }
