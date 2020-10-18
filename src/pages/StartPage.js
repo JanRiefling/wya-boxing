@@ -6,6 +6,7 @@ import WyaAppBar from '../components/WyaAppBar';
 import SetTimer from '../components/timer/SetTimer';
 import SetRounds from '../components/timer/SetRounds';
 import StopWatch from '../components/timer/StopWatch';
+import ComboDisplay from '../components/combo-display/ComboDisplay';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -44,7 +45,7 @@ export default function StartPage() {
           <Paper className={classes.paper}><StopWatch /></Paper>
         </Grid>
         <Grid item xs={12}>
-          <Paper className={classes.paper}>xs=6 sm=3</Paper>
+          <Paper className={classes.paper}><ComboDisplay /></Paper>
         </Grid>
         <Grid item xs={12}>
           <Paper className={classes.paper}>xs=6 sm=3</Paper>
