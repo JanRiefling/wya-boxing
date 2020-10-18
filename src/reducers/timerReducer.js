@@ -1,7 +1,6 @@
 import {
   SET_TIMER,
   PAUSE_TIMER,
-  RESET_TIMER,
   DECREMENT_TIMER,
   END_TIMER,
   START_TIMER
@@ -33,8 +32,6 @@ function timerReducer(state = initialState, action) {
           ...state,
           isStarted: true,
         };
-    case RESET_TIMER:
-      return state;
     case DECREMENT_TIMER:
       return {
         ...state,
