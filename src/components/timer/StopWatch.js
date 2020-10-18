@@ -58,23 +58,23 @@ useEffect(() => {
   return (
     <Grid container spacing={3}>
       <Grid item xs={3}>
-        <Typography variant="h1">{parsedTime.hours}</Typography>
+        <Typography variant="h3">{parsedTime.hours}</Typography>
       </Grid>
       <Grid item xs={1}>
-        <Typography variant="h1">:</Typography>
+        <Typography variant="h3">:</Typography>
       </Grid>
       <Grid item xs={3}>
-        <Typography variant="h1">{parsedTime.minutes}</Typography>
+        <Typography variant="h3">{parsedTime.minutes}</Typography>
       </Grid>
       <Grid item xs={1}>
-        <Typography variant="h1">:</Typography>
+        <Typography variant="h3">:</Typography>
       </Grid>
       <Grid item xs={3}>
-        <Typography variant="h1">{parsedTime.seconds}</Typography>
+        <Typography variant="h3">{parsedTime.seconds}</Typography>
       </Grid>
       <Grid item xs={2}>
         {
-        !timer.isStarted ? 
+        !isStarted ? 
         <Button onClick={startTimer} variant="outlined">Start</Button> : 
         <Button onClick={pauseTimer} variant="outlined">Pause</Button>
         }
