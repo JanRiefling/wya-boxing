@@ -3,6 +3,7 @@ import {
   PAUSE_COUNTDOWN,
   SET_COUNTDOWN,
   START_COUNTDOWN,
+  DECREMENT_COUNTDOWN
 } from "../actions/index";
 
 const initialState = {
@@ -41,4 +42,4 @@ function countDownReducer(state = initialState, action) {
   }
 }
 
-export default timerReducer;
+export default countDownReducer;

@@ -8,6 +8,7 @@ import {countDown, parseTime} from "../../utils/timer-utils";
 export default function StopWatch() {
 
   const {totalTimeInMs, isStarted, isPaused} = useSelector((state) => state.timerReducer);
+  const {countDownTimeInMs} = useSelector((state) => state.countDownReducer);
   const timer = useSelector((state) => state.timerReducer);
   const dispatch = useDispatch();
   const [parsedTime, setParsedTime] = useState({
@@ -48,13 +49,18 @@ useEffect(() => {
 
 
   function startTimer() {
+
+    // dispatch set countdown wird per hand ausgewählt
+    dispatch({type: "SET_COUNTDOWN", countDownTimeInMs: 10000})
+    
     setTimeOutCountDown(setTimeout(()=>{
       clearInterval(countDownInterval);
+      dispatch({type: 'END_COUNTDOWN'});
       dispatch({type: "START_TIMER"});
-    },3000))
+    },countDownTimeInMs))
   
    setCountDownInterval(setInterval(()=>{
-      const timeToStart = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1 ];
+      dispatch({type: "DECREMENT_COUNTDOWN"});
     },2000))
   }
 
