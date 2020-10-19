@@ -6,6 +6,7 @@ import FormControl from "@material-ui/core/FormControl";
 import { useDispatch } from "react-redux";
 import Grid from "@material-ui/core/Grid";
 import ComboCard from "./ComboCard";
+import CombosCard from "./CombosCard";
 
 
 
@@ -24,31 +25,15 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ComboSetter() {
   const classes = useStyles();
-
-  const [combo, setCombo] = useState([]);
   const [singleAction, setSingleAction] = useState("");
-  const [arrayCombos, setArrayCombos] = useState([[]]);
   const dispatch = useDispatch();
-
-  
-
-  function submitArrayOfCombos() {
-    /* dispatch(setTimerTime(totalTimeInMs)); */
-  }
-
-
- function resetCombos(){
-
- }
 
  console.log(singleAction);
 
  function addSingleAction(){
-  setCombo( [...combo, singleAction])
+  dispatch({type: 'SET_COMBO', singleAction: singleAction})
   setSingleAction("");
  }
-
-
 
   return (
       <Grid container spacing={5}>
@@ -74,8 +59,10 @@ export default function ComboSetter() {
     </FormControl>
     </Grid>
     <Grid item>
-      
-        <ComboCard combo={combo} />
+        <ComboCard/>
+    </Grid>
+    <Grid item>
+        <CombosCard/>
     </Grid>
     </Grid>
   );

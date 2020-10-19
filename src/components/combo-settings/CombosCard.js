@@ -24,24 +24,23 @@ const useStyles = makeStyles({
   },
 });
 
-export default function ComboCard() {
+export default function CombosCard() {
   const classes = useStyles();
-  const {combo} = useSelector(state => state.comboReducer);
+  const {combos} = useSelector(state => state.comboReducer);
   const dispatch = useDispatch();
 
 
 
-  function addComboToArray() {
-   dispatch({type: "SET_COMBOS", combo: combo, isSet: true });
-   dispatch({type: "REMOVE_COMBO"})
+  function saveCombos() {
+    console.log("see you later in the database")
   }
 
-  function removeCombo() {
-   dispatch({type: "REMOVE_COMBO"});
+  function removeCombos() {
+   dispatch({type: "REMOVE_COMBOS"})
   }
 
   function removeSingleAction() {
-    console.log("remove this card");
+    
   }
 
   function randomComboKey() {
@@ -52,19 +51,19 @@ export default function ComboCard() {
   return (
     <Card className={classes.root}>
       <CardContent>
-        {combo.map(action => 
+        {combos.map(singleCombo => 
           <Chip
-            label={action}
+            label={singleCombo}
             key={randomComboKey}
-            onDelete={removeSingleAction}
+            onDelete={() => dispatch({type: "REMOVE_COMBO", payload: singleCombo.key})}
           />
         )}
       </CardContent>
       <CardActions>
-        <Button size="small" onClick={addComboToArray}>
+        <Button size="small" onClick={saveCombos}>
           ADD Combo
         </Button>
-        <Button size="small" onClick={removeCombo}>
+        <Button size="small" onClick={removeCombos}>
           REMOVE ALL
         </Button>
       </CardActions>

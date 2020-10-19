@@ -5,15 +5,7 @@ import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 
 export default function ComboDisplay() {
-  const basicCombos = [
-    ["Jab", "Cross"],
-    ["Jab", "Jab", "Cross"],
-    ["Jab", "Cross", "Left Hook"],
-    ["Jab", "Cross", "Left Hook", "Cross"],
-    ["Jab", "Cross", "Left Uppercut", "Cross"],
-    ["Jab", "Right Uppercut", "Left Hook", "Cross"],
-    ["Cross", "Left Uppercut", "Cross"],
-  ];
+  const {combos, basicCombos, isSet} = useSelector(state => state.comboReducer);
   const comboIntervalSpeed = 4000;
   const [combo, setCombo] = useState([]);
   const { isStarted, totalTimeInMs } = useSelector(
@@ -25,9 +17,14 @@ export default function ComboDisplay() {
   useEffect(() => {
     if (isStarted) {
       setComboInterval(setInterval(() => {
-        setCombo(
-          basicCombos[Math.floor(Math.random() * (basicCombos.length - 1) + 1)]
-        );
+
+        if(isSet) {
+          setCombo(combos[Math.floor(Math.random() * (combos.length - 1) + 1)]);
+        } else {
+          setCombo(basicCombos[Math.floor(Math.random() * (basicCombos.length - 1) + 1)]);
+        }
+        
+
       }, comboIntervalSpeed));
 
       setComboTimeout(setTimeout(() => {

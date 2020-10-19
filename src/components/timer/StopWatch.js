@@ -3,7 +3,7 @@ import Typography from "@material-ui/core/Typography";
 import { useSelector, useDispatch } from "react-redux";
 import Grid from "@material-ui/core/Grid";
 import { Button } from "@material-ui/core";
-import {parseTime} from "../../utils/timer-utils";
+import {countDown, parseTime} from "../../utils/timer-utils";
 
 export default function StopWatch() {
 
@@ -32,6 +32,7 @@ useEffect(() => {
   setTimeOutTimer(setTimeout(() => {
     clearInterval(timerInterval)
     dispatch({type: 'END_TIMER'});
+    dispatch({type: 'UNSET_COMBOS'})
   },totalTimeInMs + 1000))
 
 } else {
@@ -44,7 +45,7 @@ useEffect(() => {
 
 
   function startTimer() {
-      dispatch({type: 'START_TIMER'});
+     countDown(dispatch, 5000);
   }
 
   function pauseTimer() {

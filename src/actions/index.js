@@ -1,3 +1,5 @@
+// timer actions
+
 export const SET_TIMER = "SET_TIMER";
 export const DECREMENT_TIMER = "DECREMENT_TIMER";
 export const RESET_TIMER = "RESET_TIMER";
@@ -33,5 +35,20 @@ export function endTimer() {
 export function startTimer() {
   return {
     type: START_TIMER,
+  };
+}
+
+// combo action
+
+export const SET_COMBOS = 'SET_COMBOS'
+export const SET_COMBO = 'SET_COMBO'
+export const REMOVE_COMBO = 'REMOVE_COMBO'
+export const REMOVE_COMBOS = 'REMOVE_COMBOS'
+export const UNSET_COMBOS = 'UNSET_COMBOS'
+
+export function setCombos(combo) {
+  return {
+    type: SET_COMBOS,
+    combo,
   };
 }
