@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function StartPage() {
   const classes = useStyles();
-  const { isStarted } = useSelector((state) => state.timerReducer);
+  const { isStarted, isPaused } = useSelector((state) => state.timerReducer);
 
   return (
     <div className={classes.root}>

@@ -52,3 +52,12 @@ export function setCombos(combo) {
     combo,
   };
 }
+
+// countDownActions
+
+
+export const SET_COUNTDOWN = "SET_COUNTDOWN";
+export const DECREMENT_COUNTDOWN = "DECREMENT_COUNTDOWN";
+export const PAUSE_COUNTDOWN = "PAUSE_COUNTDOWN";
+export const END_COUNTDOWN = "END_COUNTDOWN";
+export const START_COUNTDOWN = "START_COUNTDOWN";

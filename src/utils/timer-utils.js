@@ -22,8 +22,6 @@ export function parseTime(ms, parsedTime) {
 }
 
 
-export function countDown(dispatch, countDownTime){
-  setTimeout(()=>{
-    dispatch({type: "START_TIMER"})
-  },countDownTime)
+export function countDown(dispatch, countDownTime, countDownInterval){
+
 }
