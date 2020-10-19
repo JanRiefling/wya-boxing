@@ -7,7 +7,7 @@ import {parseTime} from "../../utils/timer-utils";
 
 export default function StopWatch() {
 
-  const {totalTimeInMs, isStarted, isPaused} = useSelector((state) => state.timerReducer);
+  const {totalTimeInMs, isStarted} = useSelector((state) => state.timerReducer);
   const timer = useSelector((state) => state.timerReducer);
   const dispatch = useDispatch();
   const [parsedTime, setParsedTime] = useState({
@@ -25,29 +25,26 @@ export default function StopWatch() {
 
 useEffect(() => {
   if(isStarted === true) {
-
-  setTimeOutTimer(setTimeout(() => {
-    clearInterval(timerInterval);
-    dispatch({type: 'END_TIMER'});
-  }, totalTimeInMs + 1000 ))
-
  setTimerInterval(setInterval(() => { 
     dispatch({type: 'DECREMENT_TIMER'});
   }, 1000))
+
+  setTimeOutTimer(setTimeout(() => {
+    clearInterval(timerInterval)
+    dispatch({type: 'END_TIMER'});
+  },totalTimeInMs + 1000))
 
 } else {
   clearInterval(timerInterval);
   clearTimeout(timeOutTimer);
 }
 
-
+// eslint-disable-next-line
 },[isStarted])
 
 
   function startTimer() {
-    if(totalTimeInMs > 0) {
       dispatch({type: 'START_TIMER'});
-    }
   }
 
   function pauseTimer() {
@@ -60,33 +57,30 @@ useEffect(() => {
 
   return (
     <Grid container spacing={3}>
-      <Grid item xs={2}>
-        <Typography>{parsedTime.hours}</Typography>
+      <Grid item xs={3}>
+        <Typography variant="h3">{parsedTime.hours}</Typography>
       </Grid>
       <Grid item xs={1}>
-        <Typography>:</Typography>
+        <Typography variant="h3">:</Typography>
       </Grid>
-      <Grid item xs={4}>
-        <Typography>{parsedTime.minutes}</Typography>
+      <Grid item xs={3}>
+        <Typography variant="h3">{parsedTime.minutes}</Typography>
       </Grid>
       <Grid item xs={1}>
-        <Typography>:</Typography>
+        <Typography variant="h3">:</Typography>
       </Grid>
-      <Grid item xs={4}>
-        <Typography>{parsedTime.seconds}</Typography>
+      <Grid item xs={3}>
+        <Typography variant="h3">{parsedTime.seconds}</Typography>
       </Grid>
       <Grid item xs={2}>
         {
-        !timer.isStarted ? 
-        <Button onClick={startTimer}>Start</Button> : 
-        <Button onClick={pauseTimer}>Pause</Button>
+        !isStarted ? 
+        <Button onClick={startTimer} variant="outlined">Start</Button> : 
+        <Button onClick={pauseTimer} variant="outlined">Pause</Button>
         }
       </Grid>
       <Grid item xs={2}>
-        <Button onClick={stopTimer}>Stop</Button>
-      </Grid>
-      <Grid item xs={2}>
-        <Button>Refresh</Button>
+        <Button onClick={stopTimer} variant="outlined">Stop</Button>
       </Grid>
     </Grid>
   );
