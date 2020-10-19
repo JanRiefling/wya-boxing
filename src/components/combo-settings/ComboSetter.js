@@ -4,6 +4,10 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import FormControl from "@material-ui/core/FormControl";
 import { useDispatch } from "react-redux";
+import Grid from "@material-ui/core/Grid";
+import ComboCard from "./ComboCard";
+
+
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -21,8 +25,9 @@ const useStyles = makeStyles((theme) => ({
 export default function ComboSetter() {
   const classes = useStyles();
 
-  const [combo, setCombo] = useState([""]);
-  const [arrayCombos, setArrayCombos] = useState([[""]]);
+  const [combo, setCombo] = useState([]);
+  const [singleAction, setSingleAction] = useState("");
+  const [arrayCombos, setArrayCombos] = useState([[]]);
   const dispatch = useDispatch();
 
   
@@ -31,30 +36,47 @@ export default function ComboSetter() {
     /* dispatch(setTimerTime(totalTimeInMs)); */
   }
 
- function resetCombos() {
+
+ function resetCombos(){
 
  }
 
+ console.log(singleAction);
+
+ function addSingleAction(){
+  setCombo( [...combo, singleAction])
+  setSingleAction("");
+ }
+
+
 
   return (
+      <Grid container spacing={5}>
+          <Grid item>
     <FormControl className={classes.container} noValidate>
       <TextField
         id="setCombo"
         label="Set Combo up to 5"
         type="text"
         onChange={(e) => {
-          setCombo(e.target.value);
+          setSingleAction(e.target.value);
         }}
-        value={combo}
+        value={singleAction}
         className={classes.textField}
         InputLabelProps={{
           shrink: true,
         }}
       />
-      <Button className={classes.textField} variant="contained" color="primary" onClick={submitArrayOfCombos}>
-       ADD COMBO
+
+      <Button className={classes.textField} variant="contained" color="primary" onClick={addSingleAction}>
+       ADD PUNCH
       </Button>
-      <Button className={classes.textField} variant="contained" color="primary" onClick={resetCombos}>Reset</Button>
     </FormControl>
+    </Grid>
+    <Grid item>
+      
+        <ComboCard combo={combo} />
+    </Grid>
+    </Grid>
   );
 }
