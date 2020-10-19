@@ -32,14 +32,12 @@ export default function SetTimer() {
   function submitTime() {
     const totalTimeInMs = (seconds * 1000) + (hours * 60 * 60 * 1000) + (minutes * 60 * 1000);
     dispatch(setTimerTime(totalTimeInMs));
-    console.log(totalTimeInMs)
   }
 
  function resetTimer() {
    setHours(0);
    setMinutes(0);
    setSeconds(0);
-   dispatch({type: "RESET_TIMER"});
  }
 
 
