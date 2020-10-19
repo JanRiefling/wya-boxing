@@ -8,6 +8,8 @@ import SetRounds from "../components/timer/SetRounds";
 import StopWatch from "../components/timer/StopWatch";
 import ComboDisplay from "../components/combo-display/ComboDisplay";
 import { useSelector } from "react-redux";
+import ComboSetter from "../components/combo-settings/ComboSetter";
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -55,7 +57,9 @@ export default function StartPage() {
             []
           )}
         </Grid>
-
+        <Grid item xs={12}>
+          <Paper className={classes.paper}><ComboSetter/></Paper>
+        </Grid>
         <Grid item xs={12}>
           <Paper className={classes.paper}>
             <ComboDisplay />
