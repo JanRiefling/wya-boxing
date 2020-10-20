@@ -74,17 +74,17 @@ export default function StopWatch() {
 
   function startTimer() {
     // dispatch set countdown wird später über settings geregelt
-    dispatch({ type: "SET_COUNTDOWN", countDownTimeInMs: 10000 });
-
-    dispatch({ type: "START_COUNTDOWN" });
+    dispatch({ type: "START_TIMER"});
   }
 
   function pauseTimer() {
     dispatch({ type: "PAUSE_TIMER" });
+    dispatch({ type: "PAUSE_COUNTDOWN" });
   }
 
   function stopTimer() {
     dispatch({ type: "END_TIMER" });
+    dispatch({type: "UNSET_COMBOS"});
   }
 
   return (
@@ -105,7 +105,7 @@ export default function StopWatch() {
         <Typography variant="h3">{parsedTime.seconds}</Typography>
       </Grid>
       <Grid item xs={2}>
-        {!isStarted ? (
+        {!isStarted && !countDownIsStarted ? (
           <Button onClick={startTimer} variant="outlined">
             Start
           </Button>
