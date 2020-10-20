@@ -35,7 +35,7 @@ function countDownReducer(state = initialState, action) {
     case DECREMENT_COUNTDOWN:
       return {
         ...state,
-        countDownTimeInMs: state.totalTimeInMs - 1000,
+        countDownTimeInMs: state.countDownTimeInMs - 1000,
       };
     default:
       return state;

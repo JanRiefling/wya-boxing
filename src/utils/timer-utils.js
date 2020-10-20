@@ -20,8 +20,3 @@ export function parseTime(ms, parsedTime) {
     seconds: parsedSeconds,
   };
 }
-
-
-export function countDown(dispatch, countDownTime, countDownInterval){
-
-}
