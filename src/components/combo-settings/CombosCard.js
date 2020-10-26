@@ -39,9 +39,9 @@ export default function CombosCard() {
    dispatch({type: "REMOVE_COMBOS"})
   }
 
-  function removeSingleAction() {
+/*   function removeSingleAction() {
     
-  }
+  } */
 
   function randomComboKey() {
   return Math.floor(Math.random() * 100 + 1);

@@ -32,7 +32,7 @@ export default function WyaAppBar() {
           <Typography variant="h6" className={classes.title}>
             WYA
           </Typography>
-          <Button color="inherit">Login</Button>
+          <Button color="inherit">Login (later)</Button>
         </Toolbar>
       </AppBar>
     </div>

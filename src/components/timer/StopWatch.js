@@ -7,7 +7,7 @@ import { parseTime } from "../../utils/timer-utils";
 
 
 export default function StopWatch() {
-  const { totalTimeInMs, isStarted, isPaused } = useSelector(
+  const { totalTimeInMs, isStarted } = useSelector(
     (state) => state.timerReducer
   );
   const { countDownTimeInMs, countDownIsStarted } = useSelector(
@@ -31,6 +31,7 @@ export default function StopWatch() {
   }, [timer]);
 
   useEffect(() => {
+    // countdown time dynamic with settings
     if (countDownIsStarted) {
       setCountDownInterval(
         setInterval(() => {
@@ -42,6 +43,8 @@ export default function StopWatch() {
         setTimeout(() => {
           clearInterval(countDownInterval);
           dispatch({ type: "END_COUNTDOWN" });
+
+          // remove dispatch Start Timer to make it independent from countdown
           dispatch({ type: "START_TIMER" });
         }, countDownTimeInMs)
       );
@@ -72,8 +75,9 @@ export default function StopWatch() {
     // eslint-disable-next-line
   }, [isStarted, countDownIsStarted]);
 
+
+  // Button auslagern und funktionen
   function startTimer() {
-    // dispatch set countdown wird später über settings geregelt
     dispatch({ type: "START_TIMER"});
   }
 
@@ -88,7 +92,7 @@ export default function StopWatch() {
   }
 
   return (
-    <Grid container spacing={3}>
+    <Grid container spacing={3} justify="center">
       <Grid item xs={3}>
         <Typography variant="h3">{parsedTime.hours}</Typography>
       </Grid>
