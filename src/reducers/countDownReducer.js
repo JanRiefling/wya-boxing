@@ -7,7 +7,7 @@ import {
 } from "../actions/index";
 
 const initialState = {
-  countDownTimeInMs: 5000,
+  countDownTimeInMs: 4000,
   countDownIsStarted: false,
   countDownIsPaused: false,
 };

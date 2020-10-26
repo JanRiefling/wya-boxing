@@ -9,6 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import SetTimer from "../components/timer/SetTimer";
 import SetRounds from "../components/timer/SetRounds";
+import SetCountdown from "../components/timer/SetCountdown";
 import ComboSetter from "../components/combo-settings/ComboSetter";
 
 
@@ -96,7 +97,7 @@ export default function AllSettings() {
           />
         </AccordionSummary>
         <AccordionDetails>
-            <Typography>Other Settings</Typography>
+            <SetCountdown />
         </AccordionDetails>
       </Accordion>
     </div>

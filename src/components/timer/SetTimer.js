@@ -84,7 +84,7 @@ export default function SetTimer() {
         }}
       />
       <Button className={classes.textField} variant="contained" color="primary" onClick={submitTime}>
-        Set Timer
+        Set Time
       </Button>
       <Button className={classes.textField} variant="contained" color="primary" onClick={resetTimer}>Reset</Button>
     </FormControl>
