@@ -50,10 +50,6 @@ function comboReducer(state = initialState, action) {
         combos: [],
         isSet: false,
       };
-    case REMOVE_COMBO:
-      return state.combo.filter(
-        (singleAction) => singleAction !== action.payload
-      );
     default:
       return state;
   }

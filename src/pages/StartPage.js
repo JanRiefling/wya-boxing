@@ -1,15 +1,14 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import { useSelector, useDispatch } from "react-redux";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
+import Button from "@material-ui/core/Button";
 import WyaAppBar from "../components/WyaAppBar";
-import SetTimer from "../components/timer/SetTimer";
-import SetRounds from "../components/timer/SetRounds";
 import StopWatch from "../components/timer/StopWatch";
 import ComboDisplay from "../components/combo-display/ComboDisplay";
-import { useSelector } from "react-redux";
-import ComboSetter from "../components/combo-settings/ComboSetter";
-
+import AllSettings from "../components/AllSettings";
+import { Typography } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,15 +19,25 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
     color: theme.palette.text.secondary,
   },
+  stopWatch: {
+    zIndex: theme.zIndex.drawer + 2,
+  },
 }));
 
 export default function StartPage() {
+  
   const classes = useStyles();
+  const dispatch = useDispatch();
   const { isStarted } = useSelector((state) => state.timerReducer);
+  const { countDownIsStarted } = useSelector((state) => state.countDownReducer);
+
+  function startApp() {
+    dispatch({ type: "START_COUNTDOWN" });
+  }
 
   return (
     <div className={classes.root}>
-      <Grid container spacing={3}>
+      <Grid container spacing={10}>
         <Grid item xs={12}>
           <WyaAppBar />
         </Grid>
@@ -37,36 +46,24 @@ export default function StartPage() {
             WYA is a helper for shadowboxing
           </Paper>
         </Grid>
-
-        <Grid item xs={12} sm={6}>
-          {isStarted === false ? (
-            <Paper className={classes.paper}>
-              <SetTimer />
-            </Paper>
-          ) : (
-            []
-          )}
-        </Grid>
-
-        <Grid item xs={12} sm={6}>
-          {isStarted === false ? (
-            <Paper className={classes.paper}>
-              <SetRounds />
-            </Paper>
-          ) : (
-            []
-          )}
-        </Grid>
         <Grid item xs={12}>
-          <Paper className={classes.paper}><ComboSetter/></Paper>
+          <AllSettings />
+        </Grid>
+        <Grid item xs={10}>
+          <Button
+            onClick={startApp}
+            variant="contained"
+            color="primary"
+            fullWidth
+          >
+            <Typography variant="h2">Whoop Your Ass</Typography>
+          </Button>
         </Grid>
         <Grid item xs={12}>
           <Paper className={classes.paper}>
             <ComboDisplay />
           </Paper>
-        </Grid>
-        <Grid item xs={12}>
-          <Paper className={classes.paper}>
+          <Paper>
             <StopWatch />
           </Paper>
         </Grid>

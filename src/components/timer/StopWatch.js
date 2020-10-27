@@ -3,11 +3,16 @@ import Typography from "@material-ui/core/Typography";
 import { useSelector, useDispatch } from "react-redux";
 import Grid from "@material-ui/core/Grid";
 import { Button } from "@material-ui/core";
-import {countDown, parseTime} from "../../utils/timer-utils";
+import { parseTime } from "../../utils/timer-utils";
+
 
 export default function StopWatch() {
-
-  const {totalTimeInMs, isStarted} = useSelector((state) => state.timerReducer);
+  const { totalTimeInMs, isStarted } = useSelector(
+    (state) => state.timerReducer
+  );
+  const { countDownTimeInMs, countDownIsStarted } = useSelector(
+    (state) => state.countDownReducer
+  );
   const timer = useSelector((state) => state.timerReducer);
   const dispatch = useDispatch();
   const [parsedTime, setParsedTime] = useState({
@@ -16,48 +21,78 @@ export default function StopWatch() {
     seconds: "00",
   });
   const [timerInterval, setTimerInterval] = useState();
+  const [countDownInterval, setCountDownInterval] = useState();
   const [timeOutTimer, setTimeOutTimer] = useState();
+  const [timeOutCountDown, setTimeOutCountDown] = useState();
 
   useEffect(() => {
     setParsedTime(parseTime(totalTimeInMs, parsedTime));
     // eslint-disable-next-line
   }, [timer]);
 
-useEffect(() => {
-  if(isStarted === true) {
- setTimerInterval(setInterval(() => { 
-    dispatch({type: 'DECREMENT_TIMER'});
-  }, 1000))
+  useEffect(() => {
+    // countdown time dynamic with settings
+    if (countDownIsStarted) {
+      setCountDownInterval(
+        setInterval(() => {
+          dispatch({ type: "DECREMENT_COUNTDOWN" });
+        }, 1000)
+      );
 
-  setTimeOutTimer(setTimeout(() => {
-    clearInterval(timerInterval)
-    dispatch({type: 'END_TIMER'});
-    dispatch({type: 'UNSET_COMBOS'})
-  },totalTimeInMs + 1000))
+      setTimeOutCountDown(
+        setTimeout(() => {
+          clearInterval(countDownInterval);
+          dispatch({ type: "END_COUNTDOWN" });
 
-} else {
-  clearInterval(timerInterval);
-  clearTimeout(timeOutTimer);
-}
+          // remove dispatch Start Timer to make it independent from countdown
+          dispatch({ type: "START_TIMER" });
+        }, countDownTimeInMs)
+      );
+    } else {
+      clearInterval(countDownInterval);
+      clearTimeout(timeOutCountDown);
+    }
 
-// eslint-disable-next-line
-},[isStarted])
+    if (isStarted === true) {
+      setTimerInterval(
+        setInterval(() => {
+          dispatch({ type: "DECREMENT_TIMER" });
+        }, 1000)
+      );
+
+      setTimeOutTimer(
+        setTimeout(() => {
+          clearInterval(timerInterval);
+          dispatch({ type: "END_TIMER" });
+          dispatch({ type: "UNSET_COMBOS" });
+        }, totalTimeInMs + 1000)
+      );
+    } else {
+      clearInterval(timerInterval);
+      clearTimeout(timeOutTimer);
+    }
+
+    // eslint-disable-next-line
+  }, [isStarted, countDownIsStarted]);
 
 
+  // Button auslagern und funktionen
   function startTimer() {
-     countDown(dispatch, 5000);
+    dispatch({ type: "START_TIMER"});
   }
 
   function pauseTimer() {
-    dispatch({ type: "PAUSE_TIMER"});
+    dispatch({ type: "PAUSE_TIMER" });
+    dispatch({ type: "PAUSE_COUNTDOWN" });
   }
 
   function stopTimer() {
-    dispatch({type: "END_TIMER"});
+    dispatch({ type: "END_TIMER" });
+    dispatch({type: "UNSET_COMBOS"});
   }
 
   return (
-    <Grid container spacing={3}>
+    <Grid container spacing={3} justify="center">
       <Grid item xs={3}>
         <Typography variant="h3">{parsedTime.hours}</Typography>
       </Grid>
@@ -74,14 +109,20 @@ useEffect(() => {
         <Typography variant="h3">{parsedTime.seconds}</Typography>
       </Grid>
       <Grid item xs={2}>
-        {
-        !isStarted ? 
-        <Button onClick={startTimer} variant="outlined">Start</Button> : 
-        <Button onClick={pauseTimer} variant="outlined">Pause</Button>
-        }
+        {!isStarted && !countDownIsStarted ? (
+          <Button onClick={startTimer} variant="outlined">
+            Start
+          </Button>
+        ) : (
+          <Button onClick={pauseTimer} variant="outlined">
+            Pause
+          </Button>
+        )}
       </Grid>
       <Grid item xs={2}>
-        <Button onClick={stopTimer} variant="outlined">Stop</Button>
+        <Button onClick={stopTimer} variant="outlined">
+          Stop
+        </Button>
       </Grid>
     </Grid>
   );
