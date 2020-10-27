@@ -12,10 +12,10 @@ const useStyles = makeStyles((theme) => ({
     color: "#fff",
   },
   stopWatch: {
-    position: 'fixed',
+    position: "fixed",
     bottom: 0,
     zIndex: theme.zIndex.drawer + 2,
-  }
+  },
 }));
 export default function ComboDisplay() {
   const classes = useStyles();
@@ -34,8 +34,9 @@ export default function ComboDisplay() {
   );
   const [comboInterval, setComboInterval] = useState();
   const [comboTimeout, setComboTimeout] = useState();
-  let countDownSound = new Audio(countDownSoundFile);
   const [openBackdrop, setOpenBackDrop] = useState(false);
+
+  const countDownSound = new Audio(countDownSoundFile);
 
   useEffect(() => {
     if (countDownIsStarted || isStarted) {
@@ -89,27 +90,26 @@ export default function ComboDisplay() {
 
   return (
     <>
-    <Grid container spacing={3}>
-    <Backdrop
-    
-      className={classes.backdrop}
-      open={openBackdrop}
-      onClick={handleClose}
-    >
-        {countDownIsStarted && (
-          <Grid item xs={12}>
-            <Typography variant="h1">{parsedCountDown}</Typography>
-          </Grid>
-        )}
-        {combo.map((singleCombo) => {
-          return (
-            <Grid item xs={4}>
-              <Typography variant="h1">{singleCombo}</Typography>
+      <Grid container spacing={3}>
+        <Backdrop
+          className={classes.backdrop}
+          open={openBackdrop}
+          onClick={handleClose}
+        >
+          {countDownIsStarted && (
+            <Grid item xs={12}>
+              <Typography variant="h1">{parsedCountDown}</Typography>
             </Grid>
-          );
-        })}
-    </Backdrop>
-  </Grid>
+          )}
+          {combo.map((singleCombo) => {
+            return (
+              <Grid item xs={4}>
+                <Typography variant="h1">{singleCombo}</Typography>
+              </Grid>
+            );
+          })}
+        </Backdrop>
+      </Grid>
     </>
   );
 }

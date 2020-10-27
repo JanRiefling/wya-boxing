@@ -22,8 +22,10 @@ const useStyles = makeStyles({
 export default function AllSettings() {
   const classes = useStyles();
 
+
   return (
     <div className={classes.root}>
+        <Typography variant="h6">Settings:</Typography>
       <Accordion>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}

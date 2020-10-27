@@ -1,15 +1,14 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import { useSelector, useDispatch } from "react-redux";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import WyaAppBar from "../components/WyaAppBar";
 import StopWatch from "../components/timer/StopWatch";
 import ComboDisplay from "../components/combo-display/ComboDisplay";
-import { useDispatch } from "react-redux";
 import AllSettings from "../components/AllSettings";
 import { Typography } from "@material-ui/core";
-
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,12 +21,15 @@ const useStyles = makeStyles((theme) => ({
   },
   stopWatch: {
     zIndex: theme.zIndex.drawer + 2,
-  }
+  },
 }));
 
 export default function StartPage() {
+  
   const classes = useStyles();
   const dispatch = useDispatch();
+  const { isStarted } = useSelector((state) => state.timerReducer);
+  const { countDownIsStarted } = useSelector((state) => state.countDownReducer);
 
   function startApp() {
     dispatch({ type: "START_COUNTDOWN" });
@@ -35,7 +37,7 @@ export default function StartPage() {
 
   return (
     <div className={classes.root}>
-      <Grid container spacing={3}>
+      <Grid container spacing={10}>
         <Grid item xs={12}>
           <WyaAppBar />
         </Grid>
@@ -47,18 +49,23 @@ export default function StartPage() {
         <Grid item xs={12}>
           <AllSettings />
         </Grid>
-        <Grid item xs={10} >
-          <Button onClick={startApp} variant="contained" color="primary" fullWidth>
+        <Grid item xs={10}>
+          <Button
+            onClick={startApp}
+            variant="contained"
+            color="primary"
+            fullWidth
+          >
             <Typography variant="h2">Whoop Your Ass</Typography>
-            </Button>
+          </Button>
         </Grid>
         <Grid item xs={12}>
           <Paper className={classes.paper}>
             <ComboDisplay />
           </Paper>
           <Paper>
-          <StopWatch />
-            </Paper>
+            <StopWatch />
+          </Paper>
         </Grid>
         <Grid item xs={12}>
           <Paper className={classes.paper}>By Jan Riefling</Paper>
