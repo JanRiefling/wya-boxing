@@ -1,76 +1,24 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import { useSelector, useDispatch } from "react-redux";
-import Paper from "@material-ui/core/Paper";
-import Grid from "@material-ui/core/Grid";
-import Button from "@material-ui/core/Button";
 import WyaAppBar from "../components/WyaAppBar";
 import StopWatch from "../components/timer/StopWatch";
 import ComboDisplay from "../components/combo-display/ComboDisplay";
 import AllSettings from "../components/AllSettings";
-import { Typography } from "@material-ui/core";
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  paper: {
-    padding: theme.spacing(2),
-    textAlign: "center",
-    color: theme.palette.text.secondary,
-  },
-  stopWatch: {
-    zIndex: theme.zIndex.drawer + 2,
-  },
-}));
+import WyaStartButton from "../components/buttons/WyaStartButton";
+import HeroSection from "../components/hero-section/HeroSection";
+import Footer from "../components/footer/Footer";
 
 export default function StartPage() {
-  
-  const classes = useStyles();
-  const dispatch = useDispatch();
-  const { isStarted } = useSelector((state) => state.timerReducer);
-  const { countDownIsStarted } = useSelector((state) => state.countDownReducer);
-
-  function startApp() {
-    dispatch({ type: "START_COUNTDOWN" });
-  }
-
   return (
-    <div className={classes.root}>
-      <Grid container spacing={10}>
-        <Grid item xs={12}>
-          <WyaAppBar />
-        </Grid>
-        <Grid item xs={12}>
-          <Paper className={classes.paper}>
-            WYA is a helper for shadowboxing
-          </Paper>
-        </Grid>
-        <Grid item xs={12}>
-          <AllSettings />
-        </Grid>
-        <Grid item xs={10}>
-          <Button
-            onClick={startApp}
-            variant="contained"
-            color="primary"
-            fullWidth
-          >
-            <Typography variant="h2">Whoop Your Ass</Typography>
-          </Button>
-        </Grid>
-        <Grid item xs={12}>
-          <Paper className={classes.paper}>
-            <ComboDisplay />
-          </Paper>
-          <Paper>
-            <StopWatch />
-          </Paper>
-        </Grid>
-        <Grid item xs={12}>
-          <Paper className={classes.paper}>By Jan Riefling</Paper>
-        </Grid>
-      </Grid>
+    <div className="grid grid-cols-1 gap-16">
+      <WyaAppBar />
+      <HeroSection />
+      <AllSettings />
+      <WyaStartButton />
+      <div>
+        <ComboDisplay />
+        <StopWatch />
+      </div>
+      <Footer className="fixed bottom-0 left-0" />
     </div>
   );
 }

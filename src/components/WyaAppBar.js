@@ -1,40 +1,25 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-  title: {
-    flexGrow: 1,
-  },
-}));
+import React from "react";
 
 export default function WyaAppBar() {
-  const classes = useStyles();
-
   return (
-    <div className={classes.root}>
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton edge="start" className={classes.menuButton} aria-label="menu">
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" className={classes.title}>
-            WYA
-          </Typography>
-          <Button color="inherit">Login (later)</Button>
-        </Toolbar>
-      </AppBar>
+    <div>
+      <ul className="flex">
+        <li className="mr-6">
+          <a className="text-blue-500 hover:text-blue-800" href={"/#"}>
+            Home
+          </a>
+        </li>
+        <li className="mr-6">
+          <a className="text-blue-500 hover:text-blue-800" href="/#">
+            About
+          </a>
+        </li>
+        <li className="mr-6">
+          <a className="text-blue-500 hover:text-blue-800" href="/#">
+            Link
+          </a>
+        </li>
+      </ul>
     </div>
   );
 }
