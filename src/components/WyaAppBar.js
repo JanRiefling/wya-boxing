@@ -5,7 +5,7 @@ export default function WyaAppBar() {
     <div>
       <ul className="flex">
         <li className="mr-6">
-          <a className="text-blue-500 hover:text-blue-800" href={"/#"}>
+          <a className="text-blue-500 hover:text-blue-800" href="/#">
             Home
           </a>
         </li>
