@@ -17,14 +17,12 @@ const useStyles = makeStyles((theme) => ({
     zIndex: theme.zIndex.drawer + 2,
   },
 }));
+
 export default function ComboDisplay() {
   const classes = useStyles();
   const { combos, basicCombos, isSet } = useSelector(
     (state) => state.comboReducer
   );
-  // später dynamisch über settings
-  const comboIntervalSpeed = 4000;
-
   const [combo, setCombo] = useState([]);
   const { isStarted, totalTimeInMs } = useSelector(
     (state) => state.timerReducer
@@ -35,8 +33,12 @@ export default function ComboDisplay() {
   const [comboInterval, setComboInterval] = useState();
   const [comboTimeout, setComboTimeout] = useState();
   const [openBackdrop, setOpenBackDrop] = useState(false);
-
   const countDownSound = new Audio(countDownSoundFile);
+  const comboIntervalSpeed = 4000;
+
+  function handleClose (){
+    setOpenBackDrop(false);
+  };
 
   useEffect(() => {
     if (countDownIsStarted || isStarted) {
@@ -72,9 +74,6 @@ export default function ComboDisplay() {
     // eslint-disable-next-line
   }, [isStarted, countDownTimeInMs]);
 
-  const handleClose = () => {
-    setOpenBackDrop(false);
-  };
 
   // use effect ?!
   let parsedCountDown = Math.floor(
